@@ -8,23 +8,23 @@ applications:
   - name: echo
     memory: 1G
     routes:
-      - route: echo.cfapps.io
+      - route: echo.apps.internal
     path: echo/target/spring-microservices-echo.jar
 
   - name: time
     memory: 1G
     routes:
-      - route: time.cfapps.io
+      - route: time.apps.internal
     path: time/target/spring-microservices-time.jar
 
   - name: greeting
     memory: 1G
     routes:
-      - route: greeting.cfapps.io
+      - route: greeting.apps.internal
     path: greeting/target/spring-microservices-greeting.jar
 
   - name: whoami
     memory: 1G
     routes:
-      - route: whoami.cfapps.io
+      - route: whoami.apps.internal
     path: whoami/target/spring-microservices-whoami.jar
