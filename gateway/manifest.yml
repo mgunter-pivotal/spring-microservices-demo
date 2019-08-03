@@ -1,0 +1,6 @@
+---
+applications:
+  - name: gateway
+    memory: 1G
+    random-route: true
+    path: target/spring-microservices-gateway.jar
