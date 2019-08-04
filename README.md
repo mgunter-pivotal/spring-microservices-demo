@@ -61,21 +61,36 @@ spring:
                 fallbackUri: forward:/api/fallback/greeting
 ```
 
-## How to run this example?
+## How to run this example With PCF?
 
 Compile this project using a JDK 8:
 ```shell
 C:\Users\user\projects\spring-microservices-demo> mvn clean package
 ```
 
+
+### Deploy the Time, Echo, Greeting, Whoami Microservices to Cloud Foundry
 You can now push all microservice to PCF (using manifest.yml in the top-level folder):
 ```shell
 C:\Users\user\projects\spring-microservices-demo> cf push
 ```
 
-### Configure gateway properties
+### Lookup and Configure gateway properties
 Although each microservice is listening on its own route,
-you should configure the microservice gateway to reach API endpoints.
+you must configure the microservice gateway to reach API endpoints. (Note: Eureka could be used to avoid this step)
+
+```shell
+C:\Users\user\projects\spring-microservices-demo> cf apps
+Getting apps in org mgunter-org / space demo-space as mgunter@pivotal.io...
+OK
+
+name         requested state   instances   memory   disk   urls
+
+echo         started           1/1         1G       1G     echo-tired-duiker.cfapps.io
+greeting     started           1/1         1G       1G     greeting-cheerful-pangolin.cfapps.io
+time         started           1/1         1G       1G     time-active-wombat.cfapps.io
+whoami       started           1/1         1G       1G     whoami-quick-dingo.cfapps.io
+```
 
 Use a text editor to modify the following file:
 C:\Users\User\projects\spring-microservices-demo\gateway\src\main\resources\application-cloud.yml
@@ -92,11 +107,12 @@ microservices:
 
 <img src="https://imgur.com/download/oE26wdY"/>
 
-### Deploy gateway to Cloud Foundry
+### Compile/Deploy gateway to Cloud Foundry
 
 (If available, create a Redis instance on your space prior
 to pushing apps):
 ```shell
+C:\Users\user\projects\spring-microservices-dem\gateway> mvn package
 C:\Users\user\projects\spring-microservices-dem\gateway> cf push
 ```
 
