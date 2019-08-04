@@ -61,60 +61,43 @@ spring:
                 fallbackUri: forward:/api/fallback/greeting
 ```
 
-## How to use it?
+## How to run this example?
 
 Compile this project using a JDK 8:
 ```shell
-$ ./mvnw clean package
+C:\Users\user\projects\spring-microservices-demo> mvn clean package
 ```
 
-In order to use request rate limiter, you also need to start
-a local Redis instance:
+You can now push all microservice to PCF (using manifest.yml in the top-level folder):
 ```shell
-$ docker run --rm --name redis -p "6379:6379/tcp" redis:5
+C:\Users\user\projects\spring-microservices-demo> cf push
 ```
 
-You can now start each microservice on your host:
-```shell
-$ java -jar gateway/target/spring-microservices-gateway.jar
-$ java -jar echo/target/spring-microservices-echo.jar
-$ java -jar time/target/spring-microservices-time.jar
-$ java -jar whoami/target/spring-microservices-whoami.jar
-$ java -jar greeting/target/spring-microservices-greeting.jar
+### Configure gateway properties
+Although each microservice is listening on its own route,
+you should configure the microservice gateway to reach API endpoints.
+
+Use a text editor to modify the following file:
+C:\Users\User\projects\spring-microservices-demo\gateway\src\main\resources\application-cloud.yml
+
+
+Configure the endpoints according to the random routes created for each microservice above.
+```
+microservices:
+  echo: "https://echo-tired-duiker.cfapps.io/api/echo"
+  time: "https://time-active-wombat.cfapps.io/api/time"
+  greeting: "https://greeting-cheerful-pangolin.cfapps.io/api/greeting"
+  whoami: "https://whoami-quick-dingo.cfapps.io/api/whoami"
 ```
 
-Although each microservice is listening on its own network port,
-you should use the microservice gateway to reach API endpoints.
-
-Hit http://localhost:8080 to discover how to reach API endpoints.
 <img src="https://imgur.com/download/oE26wdY"/>
 
-### Deploy to Cloud Foundry
+### Deploy gateway to Cloud Foundry
 
-Make sure to create a Redis instance on your space prior
-to pushing apps:
+(If available, create a Redis instance on your space prior
+to pushing apps):
 ```shell
-$ cf create-service p-redis shared-vm redis
-```
-
-You can easily deploy these microservices to Cloud Foundry:
-```shell
-$ cf push
-```
-
-This project relies on
-[container-to-container networking](https://docs.cloudfoundry.org/concepts/understand-cf-networking.html):
-you do not need to install
-[Spring Cloud Services](https://docs.pivotal.io/spring-cloud-services/common/index.html)
-or any external service registry when using Cloud Foundry.
-
-Prior to accessing these microservices, you need to open a network route
-between the gateway and each microservice:
-```shell
-$ cf add-network-policy gateway --destination-app time
-$ cf add-network-policy gateway --destination-app echo
-$ cf add-network-policy gateway --destination-app greeting
-$ cf add-network-policy gateway --destination-app whoami
+C:\Users\user\projects\spring-microservices-dem\gateway> cf push
 ```
 
 
