@@ -1,5 +1,5 @@
 microservices:
-  echo: "http://echo-kind-alligator.cfapps.io/api/echo"
-  time: "http://time-unexpected-lion.cfapps.io/api/time"
-  greeting: "http://greeting-bright-jackal.cfapps.io/api/greeting"
-  whoami: "http://whoami-tired-fox.cfapps.io/api/whoami"
+  echo: "https://echo-tired-duiker.cfapps.io/api/echo"
+  time: "https://time-active-wombat.cfapps.io/api/time"
+  greeting: "https://greeting-cheerful-pangolin.cfapps.io/api/greeting"
+  whoami: "https://whoami-quick-dingo.cfapps.io/api/whoami"
