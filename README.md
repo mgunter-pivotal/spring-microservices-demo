@@ -117,30 +117,6 @@ $ cf add-network-policy gateway --destination-app greeting
 $ cf add-network-policy gateway --destination-app whoami
 ```
 
-### Deploy to Kubernetes
-
-Deploy all microservices using this manifest:
-```shell
-$ kubectl apply -f k8s.yml
-```
-
-A namespace named `spring-microservices` will be created, which will
-contain all resources.
-
-A `LoadBalancer` resource named `gateway-lb` is created, pointing to the
-API gateway.
-You need to get the allocated IP address in order to reach the API gateway:
-```shell
-$ kubectl -n spring-microservices get svc gateway-lb
-NAME         TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)        AGE
-gateway-lb   LoadBalancer   10.100.200.159   35.187.2.214   80:31304/TCP   43m
-```
-
-Use the external IP address to reach the API gateway:
-```shell
-$ curl 35.187.2.214/api/time/current
-2018-12-19T16:14:25.143Z%
-```
 
 ## Contribute
 
