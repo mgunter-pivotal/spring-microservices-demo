@@ -116,6 +116,9 @@ C:\Users\user\projects\spring-microservices-dem\gateway> mvn package
 C:\Users\user\projects\spring-microservices-dem\gateway> cf push
 ```
 
+### Testing the microservices via the Gateway
+Using a Browser go to the gateway page below.
+<img src="https://imgur.com/download/oE26wdY"/>
 
 ## Contribute
 
