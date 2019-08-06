@@ -24,11 +24,7 @@ spring:
       # https://github.com/spring-cloud/spring-cloud-gateway/blob/master/docs/src/main/asciidoc/spring-cloud-gateway.adoc
 
       routes:
-        - id: echo
-          uri: ${microservices.echo}
-          predicates:
-            - Path=/api/echo/{segment}
-
+#<add echo route here>
         - id: time
           uri: ${microservices.time}
           predicates:
