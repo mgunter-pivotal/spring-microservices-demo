@@ -1,0 +1,4 @@
+        - id: echo
+          uri: ${microservices.echo}
+          predicates:
+            - Path=/api/echo/{segment}
